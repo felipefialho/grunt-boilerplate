@@ -1,4 +1,6 @@
-# My base files to run [Grunt](http://gruntjs.com/)
+[Grunt](http://gruntjs.com/) Base
+
+My base files to run [Grunt](http://gruntjs.com/)
 
 ## Plugins list
 
@@ -19,6 +21,6 @@
 	npm install
 	grunt w
 	```
-	
+
 1. Start hacking away by modifying the `src` directory
 
