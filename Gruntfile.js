@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 			},
 			min: {
 				files : {
-					'dist/assets/js/scripts.min.js' : [ 'src/assets/js/scripts.js' ]
+					'dist/assets/js/scripts.js' : [ 'src/assets/js/scripts.js' ]
 				}
 			}
 		},	
@@ -74,7 +74,7 @@ module.exports = function( grunt ) {
 	      files: [{
 	          expand: true,      
 	          cwd: 'src/',       
-	          src: ['**/**/*.png', '**/**/*.jpg', '**/**/*.jpeg'],  
+	          src: ['**/*.png', '**/*.jpg', '**/*.jpeg'],   
 	          dest: 'dist/',    
 	      }],
 	    }
