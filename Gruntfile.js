@@ -1,23 +1,28 @@
 module.exports = function( grunt ) {
  
   grunt.initConfig({
- 
+ 	copy: {
+	  	dist: {
+		    files: [
+		      	{
+		      		expand: true, 
+		      		cwd: 'dev/', 
+		      		src: ['**','!assets/css/less/**','!assets/**/.{png,jpg,gif,jpeg}','!assets/js/site/**'], 
+		      		dest: 'dist/'
+		      	} // makes all src relative to cwd
+		    ]
+	  	}
+	}, // copy files
+
     uglify: {                                 
 	    dist: {   
 			options: {
 				mangle : false
 			},
-			min: {
-				files : {
-					'dist/assets/js/scripts.js' : [ 'src/assets/js/scripts.js' ]
-				}
-			}
-		},	
-		dev: {
-			concat:{
-				files : {
-					'src/assets/js/scripts.js' : [ 'src/assets/js/scripts.js' ]
-				}
+			files : {
+				'dist/assets/js/scripts.js' : [ 
+					'dev/assets/js/scripts.js' 
+				]
 			}
 		}
     }, // uglify
@@ -25,20 +30,20 @@ module.exports = function( grunt ) {
 	less: {
 	  dist: {
 	    options: {
-	      paths: ["src/assets/css/less"],
+	      paths: ["dev/assets/css/less"],
 	      yuicompress: true,
 	      compress: true
 	    },
 	    files: {
-	      "dist/assets/css/style.css": "src/assets/css/less/style.less"
+	      "dist/assets/css/style.css": "dev/assets/css/less/style.less"
 	    }
 	  },
 	  dev: {
 	    options: {
-	      paths: ["src/assets/css/less"]
+	      paths: ["dev/assets/css/less"]
 	    },
 	    files: {
-	      "src/assets/css/style.css": "src/assets/css/less/style.less"
+	      "dev/assets/css/style.css": "dev/assets/css/less/style.less"
 	    }
 	  }
 	}, // Less
@@ -51,7 +56,7 @@ module.exports = function( grunt ) {
 	      },
 	      files: [{
 	          expand: true,      
-	          cwd: 'src/',       
+	          cwd: 'dev/',       
 	          src: '*.html',  
 	          dest: 'dist/',    
 	      }],
@@ -59,9 +64,9 @@ module.exports = function( grunt ) {
 	    dev: {   
 	      files: [{
 	          expand: true,      
-	          cwd: 'src/',       
+	          cwd: 'dev/',       
 	          src: '*.html',  
-	          dest: 'src/',    
+	          dest: 'dev/',    
 	      }],
 	    }
   	}, // HTMLmin
@@ -73,8 +78,8 @@ module.exports = function( grunt ) {
 	      },
 	      files: [{
 	          expand: true,      
-	          cwd: 'src/',       
-	          src: ['**/*.png', '**/*.jpg', '**/*.jpeg'],   
+	          cwd: 'dev/',       
+	          src: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],   
 	          dest: 'dist/',    
 	      }],
 	    }
@@ -83,10 +88,10 @@ module.exports = function( grunt ) {
    	watch : {
    		dev : {
    			files : [
-   				'src/**/**/*',
-   				'src/**/**/**/*'
+   				'dev/**/**/*',
+   				'dev/**/**/**/*'
    			],
-   			tasks : [ 'uglify:dev', 'htmlmin:dev', 'less:dev']
+   			tasks : [ 'uglify', 'htmlmin:dev', 'less:dev']
    		}
 	} // watch
 	 
@@ -103,10 +108,10 @@ module.exports = function( grunt ) {
  
  
   // Tasks runnings
-  grunt.registerTask( 'default', ['uglify:dev', 'htmlmin:dev', 'less:dev'] );
+  grunt.registerTask( 'default', ['uglify', 'htmlmin:dev', 'less:dev'] );
 
   // Build
-  grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
+  grunt.registerTask( 'build', [ 'uglify', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
 
   // Watch
   grunt.registerTask( 'w', [ 'watch' ] );
