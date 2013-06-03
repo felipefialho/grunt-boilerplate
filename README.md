@@ -1,6 +1,6 @@
 #[Grunt](http://gruntjs.com/) Base
 
-My base files to run [Grunt](http://gruntjs.com/)
+My base files to run [Grunt](http://gruntjs.com/) in projects
 
 ## Plugins list
 
@@ -10,6 +10,9 @@ My base files to run [Grunt](http://gruntjs.com/)
 * [grunt-contrib-htmlmin](https://github.com/gruntjs/grunt-contrib-htmlmin)
 * [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * [grunt-contrib-less](https://github.com/gruntjs/grunt-contrib-less)
+* [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)
+* [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
+* [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat)
 
 ## Getting Started
 

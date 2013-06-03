@@ -1,18 +1,47 @@
 module.exports = function( grunt ) {
  
   grunt.initConfig({
+
+
+  	clean: {
+	  dist: {
+	    src: ["dist/"]
+	  }
+	}, // clean files
+
+
  	copy: {
 	  	dist: {
 		    files: [
 		      	{
 		      		expand: true, 
-		      		cwd: 'dev/', 
-		      		src: ['**','!assets/css/less/**','!assets/**/.{png,jpg,gif,jpeg}','!assets/js/site/**'], 
-		      		dest: 'dist/'
+		      		cwd: 'dev/',
+		      		src: [
+			      		'**',
+			      		'*.{md,txt,htaccess}',
+			      		'!assets/css/less/**',
+			      		'!assets/**/.{png,jpg,gif,jpeg}',
+			      		'!assets/js/site/**'
+		      		], 
+		      		dest: 'dist/',
+		      		dot: true
 		      	} // makes all src relative to cwd
 		    ]
 	  	}
 	}, // copy files
+
+
+	concat: {
+	    options: {
+	      separator: ';'
+	    },
+	    dev: {
+	      src: [
+	      	'dev/assets/js/scripts.js'
+	      ],
+	      dest: 'dev/assets/js/scripts.min.js'
+	    }
+	}, // concat files (dev version)
 
     uglify: {                                 
 	    dist: {   
@@ -20,7 +49,7 @@ module.exports = function( grunt ) {
 				mangle : false
 			},
 			files : {
-				'dist/assets/js/scripts.js' : [ 
+				'dist/assets/js/scripts.min.js' : [ 
 					'dev/assets/js/scripts.js' 
 				]
 			}
@@ -88,10 +117,9 @@ module.exports = function( grunt ) {
    	watch : {
    		dev : {
    			files : [
-   				'dev/**/**/*',
-   				'dev/**/**/**/*'
+   				'dev/**/*{.less,.js}'
    			],
-   			tasks : [ 'uglify', 'htmlmin:dev', 'less:dev']
+   			tasks : [ 'concat:dev', 'htmlmin:dev', 'less:dev']
    		}
 	} // watch
 	 
@@ -100,6 +128,9 @@ module.exports = function( grunt ) {
 
  
   // Grunt plugins
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -108,10 +139,13 @@ module.exports = function( grunt ) {
  
  
   // Tasks runnings
-  grunt.registerTask( 'default', ['uglify', 'htmlmin:dev', 'less:dev'] );
+  grunt.registerTask( 'default', [] );
+
+  // Dev
+  grunt.registerTask( 'dev', ['concat:dev', 'htmlmin:dev', 'less:dev'] );
 
   // Build
-  grunt.registerTask( 'build', [ 'uglify', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
+  grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
 
   // Watch
   grunt.registerTask( 'w', [ 'watch' ] );
