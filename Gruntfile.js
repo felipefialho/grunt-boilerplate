@@ -34,15 +34,14 @@ module.exports = function( grunt ) {
 		    ]
 	  	}
 	}, // copy files
- 
-    uglify: {                                 
+
+	uglify: {  
+		options: {
+			mangle : false 
+		},                               
 	    dist: {   
-			options: {
-				mangle : false
-			},
 			files : {
 				'dist/assets/js/scripts.min.js': scripts
-			}
 		},                        
 	    dev: {   
 			options: {
@@ -53,7 +52,7 @@ module.exports = function( grunt ) {
 			}
 		}
     }, // uglify
-
+ 
 	less: {
 	  dist: {
 	    options: {
@@ -112,10 +111,10 @@ module.exports = function( grunt ) {
 	    }
 	}, // imageMin
 
-   	watch : {
+   	watch: {
    		dev : {
    			files : [
-   				'dev/**/*{.less,.js}',
+   				'dev/**/*.{less,js}',
    				'Gruntfile.js'
    			],
    			tasks : [ 'uglify:dev', 'less:dev']
