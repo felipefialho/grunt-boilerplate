@@ -1,4 +1,4 @@
-#[Grunt](http://gruntjs.com/) Base
+#Grunt Base Boilerplate
 
 My base files to run [Grunt](http://gruntjs.com/) in projects
 
@@ -11,8 +11,7 @@ My base files to run [Grunt](http://gruntjs.com/) in projects
 * [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * [grunt-contrib-less](https://github.com/gruntjs/grunt-contrib-less)
 * [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)
-* [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
-* [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat)
+* [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean) 
 
 ## Getting Started
 
