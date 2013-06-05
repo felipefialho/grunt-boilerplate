@@ -1,12 +1,20 @@
+
+module.exports = function( grunt ) {
+ 
+// Paths
+var PathConfig = {
+	dev: 'dev/',
+	dist: 'dist/'
+};
+
 var scripts = [
 
 ]; // Set scripts here
  
 
-module.exports = function( grunt ) {
- 
-  grunt.initConfig({
+grunt.initConfig({
 
+  	config: PathConfig, // config path
 
   	clean: {
 	  dist: {
@@ -19,7 +27,8 @@ module.exports = function( grunt ) {
 	  	dist: {
 		    files: [
 		      	{
-		      		expand: true, 
+		      		expand: true,
+		      		dot: true,
 		      		cwd: 'dev/',
 		      		src: [
 			      		'**',
@@ -28,8 +37,7 @@ module.exports = function( grunt ) {
 			      		'!assets/**/.{png,jpg,gif,jpeg}',
 			      		'!assets/js/site/**'
 		      		], 
-		      		dest: 'dist/',
-		      		dot: true
+		      		dest: 'dist/'
 		      	} // makes all src relative to cwd
 		    ]
 	  	}
@@ -121,30 +129,30 @@ module.exports = function( grunt ) {
    		}
 	} // watch
 	 
-  });
+});
 
 
- 
-  // Grunt plugins
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks('grunt-contrib-less');
- 
- 
-  // Tasks runnings
-  grunt.registerTask( 'default', [] );
 
-  // Dev
-  grunt.registerTask( 'dev', ['uglify:dev', 'less:dev'] );
+// Grunt plugins
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+grunt.loadNpmTasks('grunt-contrib-htmlmin');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
+grunt.loadNpmTasks( 'grunt-contrib-watch' );
+grunt.loadNpmTasks('grunt-contrib-less');
 
-  // Build
-  grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify:dist', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
 
-  // Watch
-  grunt.registerTask( 'w', [ 'watch' ] );
+// Tasks runnings
+grunt.registerTask( 'default', [] );
+
+// Dev
+grunt.registerTask( 'dev', ['uglify:dev', 'less:dev'] );
+
+// Build
+grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify:dist', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
+
+// Watch
+grunt.registerTask( 'w', [ 'watch' ] );
 
 };
