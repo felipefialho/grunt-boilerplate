@@ -30,32 +30,29 @@ module.exports = function( grunt ) {
 	  	}
 	}, // copy files
 
-
-	concat: {
-	    options: {
-	      separator: ';'
-	    },
-	    dev: {
-	      src: [
-	      	'dev/assets/js/scripts.js'
-	      ],
-	      dest: 'dev/assets/js/scripts.min.js'
-	    }
-	}, // concat files (dev version)
-
-    uglify: {                                 
+    uglify: {  
+		options: {
+			mangle : false 
+		},                               
 	    dist: {   
-			options: {
-				mangle : false
-			},
 			files : {
 				'dist/assets/js/scripts.min.js' : [ 
-					'dev/assets/js/scripts.js' 
+
+				]
+			}
+		},                        
+	    dev: {   
+			options: {
+				beautify : true 
+			},   
+			files : {
+				'dev/assets/js/scripts.min.js' : [ 
+
 				]
 			}
 		}
     }, // uglify
-
+ 
 	less: {
 	  dist: {
 	    options: {
@@ -114,12 +111,13 @@ module.exports = function( grunt ) {
 	    }
 	}, // imageMin
 
-   	watch : {
+   	watch: {
    		dev : {
    			files : [
-   				'dev/**/*{.less,.js}'
+   				'dev/**/*.{less,js}',
+   				'Gruntfile.js'
    			],
-   			tasks : [ 'concat:dev', 'htmlmin:dev', 'less:dev']
+   			tasks : [ 'uglify:dev', 'less:dev']
    		}
 	} // watch
 	 
@@ -142,10 +140,10 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'default', [] );
 
   // Dev
-  grunt.registerTask( 'dev', ['concat:dev', 'htmlmin:dev', 'less:dev'] );
+  grunt.registerTask( 'dev', ['uglify:dev', 'less:dev'] );
 
   // Build
-  grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
+  grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify:dist', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
 
   // Watch
   grunt.registerTask( 'w', [ 'watch' ] );
