@@ -119,15 +119,24 @@ grunt.initConfig({
 	    }
 	}, // imageMin
 
-   	watch: {
-   		dev : {
+   	watch : {
+   		options: {
+      		debounceDelay: 500,
+    	},
+   		less: {
    			files : [
-   				'dev/**/*.{less,js}',
+   				'<%= config.dev %>**/*.less'
+   			],
+   			tasks : ['less:dev']
+   		},
+   		js: {
+   			files : [
+   				'!<%= config.dev %>**/js/*.js',
    				'Gruntfile.js'
    			],
-   			tasks : ['less:dev', 'uglify:dev']
-   		}
-	} // watch
+   			tasks : ['uglify:dev']
+   		} 
+	} // watch 
 	 
 });
 
