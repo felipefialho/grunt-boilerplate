@@ -43,24 +43,6 @@ grunt.initConfig({
 	  	}
 	}, // copy files
 
-	uglify: {  
-		options: {
-			mangle : false 
-		},                               
-	    dist: {   
-			files : {
-				'dist/assets/js/scripts.min.js': scripts
-		},                        
-	    dev: {   
-			options: {
-				beautify : true 
-			},   
-			files : {
-				'dev/assets/js/scripts.min.js': scripts
-			}
-		}
-    }, // uglify
- 
 	less: {
 	  dist: {
 	    options: {
@@ -82,6 +64,24 @@ grunt.initConfig({
 	  }
 	}, // Less
 
+	uglify: {  
+		options: {
+			mangle : false 
+		},                               
+	    dist: {   
+			files : {
+				'dist/assets/js/scripts.min.js': scripts
+		},                        
+	    dev: {   
+			options: {
+				beautify : true 
+			},   
+			files : {
+				'dev/assets/js/scripts.min.js': scripts
+			}
+		}
+    }, // uglify
+ 
     htmlmin: {                                     
 	    dist: {                                       
 	      options: {                                  
@@ -125,7 +125,7 @@ grunt.initConfig({
    				'dev/**/*.{less,js}',
    				'Gruntfile.js'
    			],
-   			tasks : [ 'uglify:dev', 'less:dev']
+   			tasks : ['less:dev', 'uglify:dev']
    		}
 	} // watch
 	 
@@ -136,21 +136,22 @@ grunt.initConfig({
 // Grunt plugins
 grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-copy');
-grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-grunt.loadNpmTasks('grunt-contrib-htmlmin');
-grunt.loadNpmTasks('grunt-contrib-imagemin');
-grunt.loadNpmTasks( 'grunt-contrib-watch' );
 grunt.loadNpmTasks('grunt-contrib-less');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
+grunt.loadNpmTasks('svgo-grunt');
+grunt.loadNpmTasks('grunt-contrib-htmlmin');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
 
 // Tasks runnings
 grunt.registerTask( 'default', [] );
 
 // Dev
-grunt.registerTask( 'dev', ['uglify:dev', 'less:dev'] );
+grunt.registerTask( 'dev', ['less:dev', 'uglify:dev'] );
 
 // Build
-grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'uglify:dist', 'htmlmin:dist', 'imagemin:dist', 'less:dist' ] );
+grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'less:dist', 'uglify:dist', 'imagemin:dist', 'svgo', 'htmlmin:dist' ] );
 
 // Watch
 grunt.registerTask( 'w', [ 'watch' ] );
