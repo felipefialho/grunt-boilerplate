@@ -131,7 +131,7 @@ grunt.initConfig({
    		},
    		js: {
    			files : [
-   				'!<%= config.dev %>**/js/*.js',
+   				'<%= config.dev %>**/js/*.js',
    				'Gruntfile.js'
    			],
    			tasks : ['uglify:dev']
