@@ -1,4 +1,3 @@
-
 module.exports = function( grunt ) {
  
 // Paths
@@ -118,6 +117,13 @@ grunt.initConfig({
 	      }],
 	    }
 	}, // imageMin
+	
+	svgo: {
+	        optimize: {
+	            files: "<%= config.dist %>**/img/**/*.svg"  
+	        }
+    	}, // svgo
+
 
    	watch : {
    		options: {
