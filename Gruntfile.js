@@ -70,7 +70,8 @@ grunt.initConfig({
 	    dist: {   
 			files : {
 				'dist/assets/js/scripts.min.js': scripts
-		},                        
+			}
+	    },                        
 	    dev: {   
 			options: {
 				beautify : true 
