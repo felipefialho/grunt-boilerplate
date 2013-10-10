@@ -1,52 +1,60 @@
+
 module.exports = function( grunt ) {
- 
+
+// Load all tasks
+require('load-grunt-tasks')(grunt);
+
 // Paths
 var PathConfig = {
 	dev: 'dev/',
 	dist: 'dist/'
 };
 
+// Set scripts
 var scripts = [
 
-]; // Set scripts here
+	 
+];
  
-
+// Grunt config
 grunt.initConfig({
 
-  	config: PathConfig, // config path
+ 	// Config path
+  	config: PathConfig, 
 
+	// Clean files
   	clean: {
 	  dist: {
 	    src: ["dist/"]
 	  }
-	}, // clean files
+	}, 
 
-
- 	copy: {
+	// Copy files
+	copy: {
 	  	dist: {
 		    files: [
 		      	{
-		      		expand: true,
+		      		expand: true, 
 		      		dot: true,
-		      		cwd: 'dev/',
+		      		cwd: 'dev/', 
 		      		src: [
 			      		'**',
 			      		'*.{md,txt,htaccess}',
 			      		'!assets/css/less/**',
 			      		'!assets/**/.{png,jpg,gif,jpeg}',
-			      		'!assets/js/site/**'
+			      		'!assets/js/scripts/**',
 		      		], 
 		      		dest: 'dist/'
 		      	} // makes all src relative to cwd
 		    ]
 	  	}
-	}, // copy files
+	}, 
 
+	// Less
 	less: {
 	  dist: {
 	    options: {
 	      paths: ["dev/assets/css/less"],
-	      yuicompress: true,
 	      compress: true
 	    },
 	    files: {
@@ -61,9 +69,10 @@ grunt.initConfig({
 	      "dev/assets/css/style.css": "dev/assets/css/less/style.less"
 	    }
 	  }
-	}, // Less
+	}, 
 
-	uglify: {  
+ 	// Uglify
+    uglify: {  
 		options: {
 			mangle : false 
 		},                               
@@ -71,7 +80,7 @@ grunt.initConfig({
 			files : {
 				'dist/assets/js/scripts.min.js': scripts
 			}
-	    },                        
+		},                        
 	    dev: {   
 			options: {
 				beautify : true 
@@ -80,31 +89,16 @@ grunt.initConfig({
 				'dev/assets/js/scripts.min.js': scripts
 			}
 		}
-    }, // uglify
- 
-    htmlmin: {                                     
-	    dist: {                                       
-	      options: {                                  
-	        removeComments: true,
-	        collapseWhitespace: true
-	      },
-	      files: [{
-	          expand: true,      
-	          cwd: 'dev/',       
-	          src: '*.html',  
-	          dest: 'dist/',    
-	      }],
-	    },                              
-	    dev: {   
-	      files: [{
-	          expand: true,      
-	          cwd: 'dev/',       
-	          src: '*.html',  
-	          dest: 'dev/',    
-	      }],
-	    }
-  	}, // HTMLmin
+    }, 
 
+ 	//JShint
+	jshint: {
+		files: [
+			'<%= config.dev %>assets/js/**/*.js'
+		]
+	},
+
+ 	// ImageMin
 	imagemin: {                           
 	    dist: {                            
 	      options: {                       
@@ -112,20 +106,21 @@ grunt.initConfig({
 	      },
 	      files: [{
 	          expand: true,      
-	          cwd: 'dev/',       
+	          cwd: 'dev/assets/',       
 	          src: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],   
-	          dest: 'dist/',    
+	          dest: 'dist/assets/',    
 	      }],
 	    }
-	}, // imageMin
-	
+	}, 
+
+	// SVGOptmize
 	svgo: {
-	        optimize: {
-	            files: "<%= config.dist %>**/img/**/*.svg"  
-	        }
-    	}, // svgo
+        optimize: {
+            files: "<%= config.dist %>**/img/**/*.svg"  
+        }
+    }, 
 
-
+ 	// Watch 
    	watch : {
    		options: {
       		debounceDelay: 500,
@@ -138,36 +133,36 @@ grunt.initConfig({
    		},
    		js: {
    			files : [
-   				'<%= config.dev %>**/js/*.js',
+   				'<%= config.dev %>**/site/*.js',
    				'Gruntfile.js'
    			],
    			tasks : ['uglify:dev']
    		} 
-	} // watch 
-	 
+	} 
+
+
 });
-
-
 
 // Grunt plugins
 grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-copy');
-grunt.loadNpmTasks('grunt-contrib-less');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-imagemin');
-grunt.loadNpmTasks('svgo-grunt');
-grunt.loadNpmTasks('grunt-contrib-htmlmin');
-grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-less'); 
+grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+grunt.loadNpmTasks('grunt-contrib-imagemin'); 
+grunt.loadNpmTasks('svgo-grunt'); 
+grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
+// Less
+grunt.registerTask( 'l', ['less:dev'] );
 
-// Tasks runnings
-grunt.registerTask( 'default', [] );
-
-// Dev
-grunt.registerTask( 'dev', ['less:dev', 'uglify:dev'] );
+// Js
+grunt.registerTask( 'j', ['uglify:dev'] );
+  
+// JsLint
+grunt.registerTask( 'test', ['jshint'] );
 
 // Build
-grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'less:dist', 'uglify:dist', 'imagemin:dist', 'svgo', 'htmlmin:dist' ] );
+grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'less:dist', 'uglify:dist', 'imagemin:dist', 'svgo' ] );
 
 // Watch
 grunt.registerTask( 'w', [ 'watch' ] );

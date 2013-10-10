@@ -11,7 +11,7 @@ My base files to run [Grunt](http://gruntjs.com/) in projects
 * [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 * [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * [grunt-svgo](https://github.com/svg/svgo-grunt)
-* [grunt-contrib-htmlmin](https://github.com/gruntjs/grunt-contrib-htmlmin)
+* [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
 * [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
 
 ## Getting Started
