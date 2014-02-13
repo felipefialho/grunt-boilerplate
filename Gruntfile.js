@@ -5,72 +5,71 @@ require('load-grunt-tasks')(grunt);
 
 // Paths
 var PathConfig = {
-	dev: 'dev/',
-	dist: 'dist/'
+  dev: 'dev/',
+  dist: 'dist/'
 };
 
 // Set scripts
 var scripts = [
-
-
+// Set the scripts here
 ];
 
 // Grunt config
 grunt.initConfig({
 
- 	// Config path
-  	config: PathConfig,
+  // Config path
+    config: PathConfig,
 
-	// Clean files
-  	clean: {
-	  dist: {
-	    src: ["dist/"]
-	  }
-	},
+  // Clean files
+    clean: {
+    dist: {
+      src: ["dist/"]
+    }
+  },
 
-	// Copy files
-	copy: {
-  	dist: {
-	    files: [
-      	{
-      		expand: true,
-      		dot: true,
-      		cwd: 'dev/',
-      		src: [
-	      		'**',
-	      		'*.{md,txt,htaccess}',
-	      		'!assets/css/less/**',
-	      		'!assets/**/.{png,jpg,gif,jpeg}',
-	      		'!assets/js/scripts/**',
-      		],
-      		dest: 'dist/'
-      	} // makes all src relative to cwd
-	    ]
-  	}
-	},
+  // Copy files
+  copy: {
+    dist: {
+      files: [
+        {
+          expand: true,
+          dot: true,
+          cwd: 'dev/',
+          src: [
+            '**',
+            '*.{md,txt,htaccess}',
+            '!assets/css/less/**',
+            '!assets/**/.{png,jpg,gif,jpeg}',
+            '!assets/js/scripts/**',
+          ],
+          dest: 'dist/'
+        } // makes all src relative to cwd
+      ]
+    }
+  },
 
-	// Less
-	less: {
-	  dist: {
-	    options: {
-	      paths: ["<%= config.dev %>assets/css/less"],
-	      compress: true
-	    },
-	    files: {
-	      "<%= config.dist %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
-	    }
-	  },
-	  dev: {
-	    options: {
-	      paths: ["<%= config.dev %>assets/css/less"]
-	    },
-	    files: {
-	      "<%= config.dev %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
-	    }
-	  }
-	},
+  // Less
+  less: {
+    dist: {
+      options: {
+        paths: ["<%= config.dev %>assets/css/less"],
+        compress: true
+      },
+      files: {
+        "<%= config.dist %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
+      }
+    },
+    dev: {
+      options: {
+        paths: ["<%= config.dev %>assets/css/less"]
+      },
+      files: {
+        "<%= config.dev %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
+      }
+    }
+  },
 
- 	// Uglify
+  // Uglify
   uglify: {
     options: {
        mangle : false
@@ -90,14 +89,14 @@ grunt.initConfig({
     }
   },
 
- 	//JShint
-	jshint: {
-		files: [
-			'<%= config.dev %>assets/js/**/*.js'
-		]
-	},
+  //JShint
+  jshint: {
+    files: [
+      '<%= config.dev %>assets/js/**/*.js'
+    ]
+  },
 
- 	// ImageMin
+  // ImageMin
   imagemin: {
    dist: {
      options: {
@@ -173,7 +172,6 @@ grunt.initConfig({
     }
   }
 
-});
 });
 
 // Less
