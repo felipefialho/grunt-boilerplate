@@ -1,4 +1,3 @@
-
 module.exports = function( grunt ) {
 
 // Load all tasks
@@ -128,8 +127,8 @@ grunt.initConfig({
       }],
     }
   },
-
- 	// Watch
+  
+  // Watch
   watch : {
     options: {
       debounceDelay: 500,
@@ -176,15 +175,6 @@ grunt.initConfig({
 
 });
 });
-
-// Grunt plugins
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-contrib-copy');
-grunt.loadNpmTasks('grunt-contrib-less');
-grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-grunt.loadNpmTasks('grunt-contrib-imagemin');
-grunt.loadNpmTasks('svgo-grunt');
-grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 // Less
 grunt.registerTask( 'l', ['less:dev'] );
