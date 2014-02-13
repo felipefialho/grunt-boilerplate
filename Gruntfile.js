@@ -187,6 +187,6 @@ grunt.registerTask( 'test', ['jshint'] );
 grunt.registerTask( 'build', [ 'clean', 'copy:dist', 'less:dist', 'uglify:dist', 'imagemin:dist', 'htmlmin:dist' ] );
 
 // Watch
-grunt.registerTask( 'w', ["browser_sync", 'watch' ] );
+grunt.registerTask( 'w', ['browser_sync', 'watch' ] );
 
 };
