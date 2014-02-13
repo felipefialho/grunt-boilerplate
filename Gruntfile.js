@@ -163,7 +163,7 @@ grunt.initConfig({
       host : "",
       server: {
         baseDir: "<%= config.dev %>"
-      }
+      },
       ghostMode: {
         scroll: true,
         links: true,
