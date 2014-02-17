@@ -1,4 +1,4 @@
-#Grunt Base Boilerplate
+#Grunt Boilerplate
 
 My base files to run [Grunt](http://gruntjs.com/) in projects
 
