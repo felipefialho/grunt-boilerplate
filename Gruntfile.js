@@ -18,10 +18,10 @@ var scripts = [
 grunt.initConfig({
 
   // Config path
-    config: PathConfig,
+  config: PathConfig,
 
   // Clean files
-    clean: {
+  clean: {
     dist: {
       src: ["dist/"]
     }
@@ -43,7 +43,7 @@ grunt.initConfig({
             '!assets/js/scripts/**',
           ],
           dest: 'dist/'
-        } // makes all src relative to cwd
+        }  
       ]
     }
   },
@@ -51,18 +51,14 @@ grunt.initConfig({
   // Less
   less: {
     dist: {
-      options: {
-        paths: ["<%= config.dev %>assets/css/less"],
+      options: { 
         compress: true
       },
       files: {
         "<%= config.dist %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
       }
     },
-    dev: {
-      options: {
-        paths: ["<%= config.dev %>assets/css/less"]
-      },
+    dev: { 
       files: {
         "<%= config.dev %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
       }
@@ -173,13 +169,7 @@ grunt.initConfig({
   }
 
 });
-
-// Less
-grunt.registerTask( 'l', ['less:dev'] );
-
-// Js
-grunt.registerTask( 'j', ['uglify:dev'] );
-
+ 
 // JsLint
 grunt.registerTask( 'test', ['jshint'] );
 
