@@ -27,3 +27,6 @@ My base files to run [Grunt](http://gruntjs.com/) in projects
 
 1. Start hacking away by modifying the `dev` directory
 
+## License
+ 
+[MIT License](https://github.com/LFeh/MITLicense) © Luiz Felipe Tartarotti Fialho
