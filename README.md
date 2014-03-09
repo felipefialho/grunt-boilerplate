@@ -29,4 +29,4 @@ My base files to run [Grunt](http://gruntjs.com/) in projects
 
 ## License
  
-[MIT License](https://github.com/LFeh/MITLicense) © Luiz Felipe Tartarotti Fialho
+[MIT License](http://felipefialho.mit-license.org/) © Luiz Felipe Tartarotti Fialho
