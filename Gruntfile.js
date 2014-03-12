@@ -70,13 +70,13 @@ grunt.initConfig({
     options: {
        mangle : false
      },
-     dist: {
-       files : {
+    dist: {
+      files : {
         '<%= config.dist %>assets/js/scripts.min.js': scripts
       }
     },
     dev: {
-       options: {
+      options: {
         beautify : true
       },
       files : {
