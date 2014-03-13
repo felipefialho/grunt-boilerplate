@@ -23,7 +23,7 @@ grunt.initConfig({
   // Clean files
   clean: {
     dist: {
-      src: ["dist/"]
+      src: ['dist/']
     }
   },
 
@@ -55,12 +55,12 @@ grunt.initConfig({
         compress: true
       },
       files: {
-        "<%= config.dist %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
+        '<%= config.dist %>assets/css/style.css': '<%= config.dev %>assets/css/less/style.less'
       }
     },
     dev: { 
       files: {
-        "<%= config.dev %>assets/css/style.css": "<%= config.dev %>assets/css/less/style.less"
+        '<%= config.dev %>assets/css/style.css': '<%= config.dev %>assets/css/less/style.less'
       }
     }
   },
@@ -156,9 +156,9 @@ grunt.initConfig({
     },
     options: {
       watchTask: true,
-      host : "",
+      host : '',
       server: {
-        baseDir: "<%= config.dev %>"
+        baseDir: '<%= config.dev %>'
       },
       ghostMode: {
         scroll: true,
