@@ -1,6 +1,6 @@
-#Grunt Boilerplate
+# Grunt Boilerplate
 
-My base files to run [Grunt](http://gruntjs.com/) in projects
+My base files to run [Grunt](http://gruntjs.com/) on projects
 
 ## Plugins list
 
