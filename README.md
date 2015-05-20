@@ -19,8 +19,8 @@ My base files to run [Grunt](http://gruntjs.com/) on projects
 1. Clone the project and run the [NPM](https://npmjs.org/)
 
 	``` bash
-	git clone git://github.com/lfeh/grunt-base.git
-	cd LFeh/Grunt-Base
+	git clone https://github.com/LFeh/grunt-boilerplate
+	cd LFeh/grunt-boilerplate
 	npm install
 	grunt w
 	```
