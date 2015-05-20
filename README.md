@@ -25,7 +25,7 @@ My base files to run [Grunt](http://gruntjs.com/) on projects
 	grunt w
 	```
 
-1. Start hacking away by modifying the `dev` directory
+1. Start hacking away by modifying the `_source` directory
 
 ## License
  
