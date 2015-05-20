@@ -51,9 +51,7 @@ module.exports = function(grunt) {
           paths: [
             'node_modules/grunt-contrib-stylus/node_modules',
             'node_modules/jeet/stylus',
-            'node_modules/nib/lib',
-            'node_modules/stylus-font-face/lib',
-            'node_modules/stylus-font-face/lib/plugin.js'
+            'node_modules/nib/lib', 
           ]
         },
         files: {

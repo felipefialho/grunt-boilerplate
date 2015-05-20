@@ -21,8 +21,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "jeet": "^6.1.2",
     "jit-grunt": "^0.9.1",
-    "nib": "^1.1.0",
-    "stylus-font-face": "^1.0.0",
+    "nib": "^1.1.0", 
     "time-grunt": "^1.1.1"
   }
 }

@@ -15,8 +15,7 @@ My base files to run [Grunt](http://gruntjs.com/) on projects
 * [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 * [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
 * [jeet](http://jeet.gs/)
-* [nib](https://github.com/tj/nib)
-* [stylus-font-face](https://github.com/code42day/stylus-font-face)
+* [nib](https://github.com/tj/nib) 
 * [time-grunt](https://github.com/sindresorhus/time-grunt)
 
 ## Getting Started
