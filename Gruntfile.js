@@ -5,16 +5,19 @@ module.exports = function(grunt) {
   // Grunt Time
   // ---------------------------------
   require('time-grunt')(grunt);
- 
+  
+   // Load all tasks
+  // ---------------------------------
+  require('jit-grunt')(grunt);
+
+
   // Init Grunt config
   // ---------------------------------
   grunt.initConfig({
-  
+
 
     // Define our source and build folders
-    // ---------------------------------
-    base_path: '',
-
+    // --------------------------------- 
     build:     '_public',
     css_build: '<%= build %>/css',
     js_build:  '<%= build %>/js',
@@ -27,20 +30,6 @@ module.exports = function(grunt) {
     img_src:   '<%= src %>/img',
     svg_src:   '<%= src %>/svg',
  
-
-    // Task: Agroup Media Queries
-    // ---------------------------------
-    cmq: {
-      options: {
-        log: true
-      },
-      dev: {
-        files: {
-          '<%= css_src %>': ['<%= css_build %>/style.css']
-        }
-      }
-    },
-
  
     // Task: Stylus
     // ---------------------------------
@@ -51,7 +40,9 @@ module.exports = function(grunt) {
           paths: [
             'node_modules/grunt-contrib-stylus/node_modules',
             'node_modules/jeet/stylus',
-            'node_modules/nib/lib', 
+            'node_modules/nib/lib',
+            'node_modules/stylus-font-face/lib',
+            'node_modules/stylus-font-face/lib/plugin.js'
           ]
         },
         files: {
@@ -66,13 +57,32 @@ module.exports = function(grunt) {
     }, 
 
 
+    // Task: Agroup Media Querie
+    // ---------------------------------
+    combine_mq: {
+      options: {
+        log: true
+      },
+      dev: {
+        files: {
+          '<%= website_css_build %>/style.css': ['<%= website_css_build %>/style.css']
+        }
+      },
+      cms: {
+        files: {
+          '<%= cms_css_build %>/style.css': ['<%= cms_css_build %>/style.css']
+        }
+      }
+    },
+    
+
     // Task: Ugligy
     // ---------------------------------
     uglify: { 
       vendor: {
         files: {
-          '<%= js_src %>/_vendor.js': [
-              // Your vendors scripts
+          '<%= js_build %>/_vendor.js': [
+            // Vendor scripts
           ]
         }
       },
@@ -84,11 +94,10 @@ module.exports = function(grunt) {
           sourceMap: true,
           report: 'min'
         }, 
-        files: { 
-          '<%= js_build %>/app.min.js': [
-            '<%= js_src %>/_vendor.js',
-            '<%= js_src %>/functions/*',  
-            '<%= js_src %>/main.js'
+        files: {
+          '<%= js_build %>/app.js': [
+            '<%= js_src %>/*.js',
+            '<%= js_src %>/**/*.js', 
           ]
         }
       },
@@ -96,9 +105,7 @@ module.exports = function(grunt) {
       build: { 
         files: { 
           '<%= js_build %>/app.min.js': [
-            '<%= js_src %>/_vendor.js',
-            '<%= js_src %>/functions/*',  
-            '<%= js_src %>/main.js'
+            '<%= js_build %>/*.js', 
           ]
         }
       }
@@ -126,8 +133,7 @@ module.exports = function(grunt) {
       compile: {
         options: {
           client: false,
-          preserveComments: false,
-          pretty: true
+          preserveComments: false 
         },
         files: [{
           cwd: '<%= src %>/jade',
@@ -156,8 +162,8 @@ module.exports = function(grunt) {
         }] 
       }
     },
+ 
   
-
     // Task: ImageMin
     // ---------------------------------
     imagemin: {
@@ -256,77 +262,23 @@ module.exports = function(grunt) {
     }
 
   });
+ 
 
   // Grunt registers
   // ---------------------------------
 
-  // Stylus
-  grunt.registerTask('styl', [], function() {
-     grunt.loadNpmTasks('grunt-contrib-stylus');
-     grunt.task.run('stylus:dev');
-  });
- 
-  // CSS
-  grunt.registerTask('css', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-stylus');
-    grunt.loadNpmTasks('grunt-combine-media-queries'); 
-    grunt.task.run('stylus:dev', 'cmq', 'stylus:compress');
-  });
+  // stylus
+  grunt.registerTask( 'styl', ['stylus'] );
 
-  // Jade 
-  grunt.registerTask('jade_dev', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-jade'); 
-    grunt.task.run('jade');
-  });
+  // Js
+  grunt.registerTask('js', ['jshint', 'uglify']);
 
-  // HTML
-  grunt.registerTask('html', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-jade'); 
-    grunt.loadNpmTasks('grunt-contrib-htmlmin'); 
-    grunt.task.run('jade', 'htmlmin');
-  });
+  //CSS
+  grunt.registerTask('css', ['stylus:dev', 'combine_mq', 'stylus:compress']); 
 
-  // Js Dev
-  grunt.registerTask('js_dev', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-jshint'); 
-    grunt.loadNpmTasks('grunt-contrib-uglify'); 
-    grunt.task.run('uglify:dev');
-  });
-
-  // Js Vendor
-  grunt.registerTask('js_vendor', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.task.run('uglify:vendor');
-  }); 
-
-  // Jshint
-  grunt.registerTask('jshint', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-jshint'); 
-    grunt.task.run('jshint');
-  });    
-
-  // Imagemin
-  grunt.registerTask('img', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-imagemin'); 
-    grunt.task.run('imagemin');
-  });  
-
-  // Build 
-  grunt.registerTask('build', [], function() {
-    grunt.loadNpmTasks('grunt-contrib-uglify'); 
-    grunt.loadNpmTasks('grunt-contrib-imagemin'); 
-    grunt.loadNpmTasks('grunt-contrib-jade'); 
-    grunt.loadNpmTasks('grunt-contrib-htmlmin'); 
-    grunt.loadNpmTasks('grunt-contrib-stylus'); 
-    grunt.loadNpmTasks('grunt-combine-media-queries'); 
-    grunt.task.run('uglify:vendor', 'uglify:dev', 'imagemin', 'jade', 'htmlmin', 'stylus:dev', 'cmq', 'stylus:compress');
-  });    
+  // Build
+  grunt.registerTask( 'build', ['jshint', 'uglify', 'jade', 'stylus:dev', 'combine_mq', 'stylus:compress', 'imagemin' ] );
 
   // Watch
-  grunt.registerTask('w', [], function() {
-    grunt.loadNpmTasks('grunt-browser-sync');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.task.run('browserSync','watch');
-  });  
-
-};
+  grunt.registerTask( 'w', ['browserSync', 'watch' ] ); 
+}; 
