@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
     // Define our source and build folders
     // --------------------------------- 
+
     build:     '_public',
     css_build: '<%= build %>/css',
     js_build:  '<%= build %>/js',
@@ -76,13 +77,30 @@ module.exports = function(grunt) {
     },
     
 
+    // CSSMin
+    // ---------------------------------
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: { 
+          '<%= css_build %>/style.css': '<%= css_build %>/style.css', 
+        }
+      }
+    },
+
+
     // Task: Ugligy
     // ---------------------------------
     uglify: { 
       vendor: {
         files: {
           '<%= js_build %>/_vendor.js': [
-            // Vendor scripts
+
+            // Vendor Plugins 
+
           ]
         }
       },
@@ -121,7 +139,7 @@ module.exports = function(grunt) {
           '-W033': true,
           '-W099': true,
         },
-        src: ['<%= js_src %>/main.js', '<%= js_src %>/functions/*.js'],
+        src: ['<%= js_src %>/*.js', '<%= js_src %>/**/*.js', '<%= test %>/spec/*.js', '<%= test %>/spec/**/*.js'],
       },
 
     },
@@ -133,7 +151,8 @@ module.exports = function(grunt) {
       compile: {
         options: {
           client: false,
-          preserveComments: false 
+          preserveComments: false, 
+          pretty: false,
         },
         files: [{
           cwd: '<%= src %>/jade',
@@ -144,26 +163,8 @@ module.exports = function(grunt) {
         }]
       }
     },
-
-
-    // Task: Htmlmin
-    // ---------------------------------
-    htmlmin: {                                     
-      dist: {                                      
-        options: {                                 
-          removeComments: true,
-          collapseWhitespace: true
-        },
-        files: [{
-           expand: true,
-           cwd: '<%= build %>/',
-           src: '**/*.html',
-           dest: '<%= build %>/'
-        }] 
-      }
-    },
  
-  
+
     // Task: ImageMin
     // ---------------------------------
     imagemin: {
@@ -209,12 +210,12 @@ module.exports = function(grunt) {
 
       js: {
         files: ['<%= js_src %>/*.js', '<%= js_src %>/**/*.js'],
-        tasks: ['js_dev']
+        tasks: ['uglify:dev']
       },
 
       html: {
         files: ['<%= src %>/*.jade','<%= src %>/**/*.jade'],
-        tasks: ['jade_dev']
+        tasks: ['jade']
       },
 
       img: {
@@ -228,7 +229,7 @@ module.exports = function(grunt) {
         files: [
           'Gruntfile.js'
         ],
-        tasks: ['js_vendor', 'js_dev', 'img', 'html']
+        tasks: ['js', 'imagemin']
       }
     },
 
@@ -262,8 +263,8 @@ module.exports = function(grunt) {
     }
 
   });
- 
 
+ 
   // Grunt registers
   // ---------------------------------
 
@@ -274,10 +275,13 @@ module.exports = function(grunt) {
   grunt.registerTask('js', ['jshint', 'uglify']);
 
   //CSS
-  grunt.registerTask('css', ['stylus:dev', 'combine_mq', 'stylus:compress']); 
+  grunt.registerTask('css', ['stylus:dev', 'combine_mq', 'cssmin']);
+
+  // Test
+  grunt.registerTask('test', ['karma']);
 
   // Build
-  grunt.registerTask( 'build', ['jshint', 'uglify', 'jade', 'stylus:dev', 'combine_mq', 'stylus:compress', 'imagemin' ] );
+  grunt.registerTask( 'build', ['jshint', 'uglify', 'jade', 'stylus', 'combine_mq', 'cssmin', 'imagemin' ] );
 
   // Watch
   grunt.registerTask( 'w', ['browserSync', 'watch' ] ); 
