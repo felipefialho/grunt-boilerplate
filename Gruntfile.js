@@ -66,14 +66,9 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          '<%= website_css_build %>/style.css': ['<%= website_css_build %>/style.css']
+          '<%= css_build %>/style.css': ['<%= css_build %>/style.css']
         }
-      },
-      cms: {
-        files: {
-          '<%= cms_css_build %>/style.css': ['<%= cms_css_build %>/style.css']
-        }
-      }
+      } 
     },
     
 
@@ -229,7 +224,7 @@ module.exports = function(grunt) {
         files: [
           'Gruntfile.js'
         ],
-        tasks: ['js', 'imagemin']
+        tasks: ['build']
       }
     },
 
@@ -268,20 +263,17 @@ module.exports = function(grunt) {
   // Grunt registers
   // ---------------------------------
 
-  // stylus
+  // Stylus
   grunt.registerTask( 'styl', ['stylus'] );
 
   // Js
   grunt.registerTask('js', ['jshint', 'uglify']);
 
-  //CSS
+  // CSS
   grunt.registerTask('css', ['stylus:dev', 'combine_mq', 'cssmin']);
-
-  // Test
-  grunt.registerTask('test', ['karma']);
-
+ 
   // Build
-  grunt.registerTask( 'build', ['jshint', 'uglify', 'jade', 'stylus', 'combine_mq', 'cssmin', 'imagemin' ] );
+  grunt.registerTask( 'build', ['imagemin', 'jshint', 'uglify', 'jade', 'stylus', 'combine_mq', 'cssmin' ] );
 
   // Watch
   grunt.registerTask( 'w', ['browserSync', 'watch' ] ); 
