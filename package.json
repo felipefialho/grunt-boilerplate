@@ -11,7 +11,7 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-browser-sync": "^2.1.2",
-    "grunt-combine-media-queries": "~1.0.19",
+    "grunt-combine-mq": "^0.9.0",
     "grunt-contrib-cssmin": "^0.12.3",
     "grunt-contrib-imagemin": "~0.9.4",
     "grunt-contrib-jade": "*",
