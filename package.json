@@ -19,8 +19,8 @@
     "grunt-contrib-stylus": "^0.21.0",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "~0.6.1",
-    "jeet": "^6.1.2",
     "jit-grunt": "^0.9.1",
+    "jeet": "^6.1.2",
     "nib": "^1.1.0", 
     "time-grunt": "^1.1.1"
   }
